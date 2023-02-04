@@ -17,7 +17,7 @@ class InverseNumberStream extends Transform{
 
 class MultiplyByStream extends Writable{
     _write(chunk, encoding, callback){
-        console.log(Number(chunk.toString()) * 10)
+        // console.log(Number(chunk.toString()) * 10)
         callback()
     }
 }
