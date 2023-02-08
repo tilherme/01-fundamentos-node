@@ -19,12 +19,21 @@ export class Database{
 
     }
 
-    select(table){
-        const data = this.#database[table]
+    
+   select(table, search) {
+    let data = this.#database[table] ?? []
 
-        console.log(data)
-        return data
+    if (search) {
+      data = data.filter(row => {
+        return Object.entries(search).some(([key, value]) => {
+            console.log(row);
+            return row[key].includes(value)
+        })
+      })
     }
+
+    return data
+  }
 
     insert(table, data){
         if(Array.isArray(this.#database[table])){
@@ -45,5 +54,12 @@ export class Database{
           this.#persist()
         }
       }
+      uptade(table, id, data) {
+        const rowIndex = this.#database[table].findIndex(row => row.id === id)
    
+        if (rowIndex > -1) {
+          this.#database[table][rowIndex] = { id, ...data }
+          this.#persist()
+        }
+      }
 }
