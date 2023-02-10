@@ -26,7 +26,10 @@ export class Database{
     if (search) {
       data = data.filter(row => {
         return Object.entries(search).some(([key, value]) => {
-            console.log(row);
+          
+            if(!value){
+              return true
+            }
             return row[key].includes(value)
         })
       })
