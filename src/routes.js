@@ -29,11 +29,11 @@ export const routes = [
         path: buildRoutePath('/users'),
         handler:(req, res) => {
             const {name, email} = req.body
-            const user = [{
+            const user = {
              id:randomUUID(),
              name,
              email,
-            }]
+            }
             database.insert('users', user)
             return res.writeHead(201).end()
         }
